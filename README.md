@@ -70,3 +70,18 @@ Coordinates for KCC from:
 
     https://www.latlong.net/place/kansas-city-ks-usa-27933.html#:~:text=Satellite%20Map%20of%20Kansas%20City%2C%20KS%2C%20USA&text=The%20latitude%20of%20Kansas%20City,%C2%B0%2040'%2035.0112''%20W.
 
+The following section:
+
+    pointToLayer: function (feature,latlng) {
+        ...
+
+used the method from here:
+
+    https://leafletjs.com/examples/geojson/
+
+    L.geoJSON(someGeojsonFeature, {
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, geojsonMarkerOptions);
+        }
+    })
+
