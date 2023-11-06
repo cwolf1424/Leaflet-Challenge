@@ -1,12 +1,17 @@
 # Leaflet-Challenge
 Challenge assignment for Leaflet
-Data for this project was from the provided project files.
 
-Attribution: 
+Data for this project was from the following source:
+
+    https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
+
+Specifically using this subset of data:
+
+    https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson
 
 Layout for assignment html came from starter file.
 
-Specific sections using sources listed below:
+Specific sections directly using sources listed below:
 
 --------------------------------------------------
 Setup 
@@ -62,6 +67,18 @@ The following CSS code was also provided:
     height: 100%;
     }
 
+The following CSS code:
+
+    h1 {
+    text-align: center;
+    }
+
+Was from WK15 Day 1 In-Class Activity 7
+
+The leaflet plugin used for legends was from:
+
+    https://github.com/ptma/Leaflet.Legend
+
 --------------------------------------------------
 logic.js file
 --------------------------------------------------
@@ -72,7 +89,7 @@ Coordinates for KCC from:
 
 The following section:
 
-    pointToLayer: function (feature,latlng) {
+    pointToLayer: function (feature,latlng) {...}
         ...
 
 used the method from here:

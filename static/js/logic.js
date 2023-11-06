@@ -19,8 +19,10 @@ function createMarkers (earthquakeData) {
             })
         },
         onEachFeature: function(feature,layer) {
-            layer.bindPopup(`<h1>Earthquake Info:</h1><p>Time: ${new Date(feature.properties.time)}</p>
+            layer.bindPopup(`<h1>Earthquake Info</h1><p>Time: ${new Date(feature.properties.time)}</p>
             <p>Magnitude: ${feature.properties.mag}</p>
+            <p>Depth : ${feature.geometry.coordinates[2]}</p>
+            <p>Location: ${feature.properties.place}</p>
             <p>Details: <a href=${feature.properties.url}>Click Here</a></p>`
             )
         }
@@ -45,11 +47,11 @@ function chooseRadius (earthquake) {
 
 //Choose color of earthquake markers based on depth
 function chooseColor (earthquake) {
-    if (earthquake.geometry.coordinates[2] >= 500)
+    if (earthquake.geometry.coordinates[2] >= 100)
         return "red"
-    else if (earthquake.geometry.coordinates[2] >= 250)
+    else if (earthquake.geometry.coordinates[2] >= 75)
         return "orange"
-    else if (earthquake.geometry.coordinates[2] >= 125)
+    else if (earthquake.geometry.coordinates[2] >= 50)
         return "yellow"
     else
         return "green"
@@ -58,6 +60,7 @@ function chooseColor (earthquake) {
 
 //Create Map for earthquakes
 function buildMap(earthquakeMarkers) {
+    
     //Set tile layer variables
     let streetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
@@ -66,13 +69,13 @@ function buildMap(earthquakeMarkers) {
         attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
         });
 
-    //Set base maps
+    //Set base maps variable
     let baseMaps = {
         "Street Map": streetMap,
         "Topographical Map": topoMap
     };
 
-    //Set overlay maps
+    //Set overlay maps variable
     let overlayMaps = {
         "Earthquakes" : earthquakeMarkers
     };
@@ -94,19 +97,19 @@ function buildMap(earthquakeMarkers) {
         position: "bottomright",
         collapsed: false,
         legends: [{
-            label: "Depth Over 500",
+            label: "Depth Over 100",
             type: "circle",
             color: "white",
             fillColor: "red"},
-            {label: "Depth Between 250 and 500",
+            {label: "Depth Between 50 and 75",
             type: "circle",
             color: "white",
             fillColor: "orange"},
-            {label: "Depth Between 125 and 250",
+            {label: "Depth Between 50 and 75",
             type: "circle",
             color: "white",
             fillColor: "yellow"},
-            {label: "Depth Below 125",
+            {label: "Depth Below 50",
             type: "circle",
             color: "white",
             fillColor: "green"
