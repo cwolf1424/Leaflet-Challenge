@@ -102,3 +102,8 @@ used the method from here:
         }
     })
 
+Tile layers attributed in logic.js:
+
+    https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
+    https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png
+    

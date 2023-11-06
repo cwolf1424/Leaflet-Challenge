@@ -8,6 +8,7 @@ d3.json(url).then(function(data){
 
 //Create Markers for earthquakes
 function createMarkers (earthquakeData) {
+    
     let earthquakeMarkers = L.geoJson(earthquakeData, {
         pointToLayer: function (feature,latlng) {
             return L.circleMarker(latlng,{
@@ -56,7 +57,6 @@ function chooseColor (earthquake) {
     else
         return "green"
 };
-
 
 //Create Map for earthquakes
 function buildMap(earthquakeMarkers) {
