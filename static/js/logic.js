@@ -13,8 +13,8 @@ function createMarkers (earthquakeData) {
             return L.circleMarker(latlng,{
                 radius: chooseRadius(feature),
                 color:"white",
-                fillColor: "green",
-                fillOpacity: chooseOpacity(feature),
+                fillColor: chooseColor(feature),
+                fillOpacity: 0.5,
                 weight: 1
             })
         },
@@ -43,31 +43,16 @@ function chooseRadius (earthquake) {
         return 2.5
 };
 
-//Choose Color of earthquake markers based on magnitude
+//Choose color of earthquake markers based on depth
 function chooseColor (earthquake) {
-    if (earthquake.properties.mag >= 8)
-        return "red"
-    else if (earthquake.properties.mag >=6)
-        return "Orange"
-    else if (earthquake.properties.mag >=4)
-        return "Yellow"
-    else if (earthquake.properties.mag >= 2)
-        return 5
-    else
-        return 2.5
-};
-
-
-//Choose opacity of earthquake markers based on depth
-function chooseOpacity (earthquake) {
     if (earthquake.geometry.coordinates[2] >= 500)
-        return 1
+        return "red"
     else if (earthquake.geometry.coordinates[2] >= 250)
-        return .75
+        return "orange"
     else if (earthquake.geometry.coordinates[2] >= 125)
-        return .5
+        return "yellow"
     else
-        return .25
+        return "green"
 };
 
 
@@ -101,6 +86,30 @@ function buildMap(earthquakeMarkers) {
 
     //Set Control Layer
     L.control.layers(baseMaps,overlayMaps, {
-        collapsed:false
+        collapsed: false
+    }).addTo(myMap);
+
+    //Set Legend
+    L.control.Legend({
+        position: "bottomright",
+        collapsed: false,
+        legends: [{
+            label: "Depth Over 500",
+            type: "circle",
+            color: "white",
+            fillColor: "red"},
+            {label: "Depth Between 250 and 500",
+            type: "circle",
+            color: "white",
+            fillColor: "orange"},
+            {label: "Depth Between 125 and 250",
+            type: "circle",
+            color: "white",
+            fillColor: "yellow"},
+            {label: "Depth Below 125",
+            type: "circle",
+            color: "white",
+            fillColor: "green"
+        }]
     }).addTo(myMap);
 }
